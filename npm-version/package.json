@@ -1,0 +1,23 @@
+{
+  "name": "rootaid-v1.2-cli",
+  "description": "This is an application that generates TypeScript templates from frontend/backend perspectives depending on user options",
+  "version": "1.2.0",
+  "type": "module",
+  "bin": {
+    "create-rootaid-app": "index.js"
+  },
+  "author": "surge-global",
+  "dependencies": {
+    "copyfiles": "^2.4.1",
+    "fs": "^0.0.1-security",
+    "fs-extra": "^11.1.0",
+    "inquirer": "^9.1.4"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "@types/inquirer": "^9.0.3",
+    "@types/node": "^18.11.10",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.3"
+  }
+}
