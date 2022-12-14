@@ -37,6 +37,15 @@ export const createUser = async ({
   }
 };
 
+//@desc FIND USER BY TOKEN
+//@route POST
+export const findUserByToken = async (RefreshToken: string) => {
+  try {
+    const existingUser = await User.findOneBy({ refreshToken: RefreshToken });
+    return existingUser;
+  } catch (error) {}
+};
+
 //@desc SAVING REFRESH TOKEN
 //@route POST
 export const saveRefreshToken = async (
@@ -70,7 +79,7 @@ export const findUserById = async (id: string) => {
 //@route POST
 export const removeRefreshToken = async (RefreshToken: string) => {
   try {
-    const user = await User.findOneBy({ refreshToken: RefreshToken });
+    const user = await findUserByToken(RefreshToken);
     if (user) {
       user.refreshToken = "";
       const result = await user.save();
