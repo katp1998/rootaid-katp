@@ -1,4 +1,4 @@
-import { registerUser, loginUser } from "../../services/auth/user.service";
+import { signUp, logIn } from "../../services/user.services";
 
 //REGISTER REQUEST INTERFACE
 interface RegisterRequest {
@@ -18,7 +18,7 @@ const handleRegister = async (ctx: any) => {
   try {
     const { name, email, password } = <RegisterRequest>ctx.request.body;
     //PASSING INTO METHOD IN USER.SERVICE
-    const data = await registerUser(name, email, password);
+    const data = await signUp(name, email, password);
     ctx.body = {
       name: name,
       response: data,
@@ -34,7 +34,7 @@ const handleLogin = async (ctx: any) => {
 
   try {
     //PASSING INTO METHOD IN USER.SERVICE
-    const data = await loginUser(email, password);
+    const data = await logIn(email, password);
     ctx.body = {
       status: "Successful Login",
       info: data,
