@@ -6,6 +6,7 @@ export const connection = createConnection({
   database: 'users', 
   username: 'root',
   password: '1234', 
+  port: 3306,
   logging: true,
   synchronize: true,
   entities: [User],
