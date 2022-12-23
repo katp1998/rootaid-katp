@@ -146,7 +146,7 @@ function frontendOptions() {
       name: "ui_lib_type",
       type: "list",
       message: "Select the UI library you'd like to work with: \n",
-      choices: ["Ant-design", "MUI", "React-bootstrap"],
+      choices: ["Ant-design", "MUI", "Bootstrap"],
     });
     projectPath += `/${apiType.api_type}`;
     projectPath += `/${frontendFrameworkType.frontend_framework_type}`;
