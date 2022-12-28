@@ -4,8 +4,14 @@ import {
   findUserById,
 } from "../database/repositories/user.repository";
 
+//INTERFACES:
+//Registering User:
+export interface RegisterInputs{
+  
+}
+
 //Find an existing user or create one:
-export const findOrCreateUser = async (
+export const signUp = async (
   name: string,
   email: string,
   googleID: string
@@ -14,7 +20,7 @@ export const findOrCreateUser = async (
   const user = await findUserById(googleID);
 
   if (user) {
-    user
+    
     //generate refresh token:
 
     //save refresh token:

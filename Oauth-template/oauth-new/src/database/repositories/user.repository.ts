@@ -5,7 +5,7 @@ import { IUserInputs } from "../types/user.types";
 export const createUser = async ({ name, email, googleID }: IUserInputs) => {
   try {
     //create user:
-    const newUser = new userModel({
+    const newUser = new User({
       name,
       email,
       googleID,

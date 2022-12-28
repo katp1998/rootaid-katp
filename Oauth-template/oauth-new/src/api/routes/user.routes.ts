@@ -7,24 +7,28 @@ const router = Router();
 //@desc: Authentication with google
 //@route: GET /auth/google
 router.get(
-  "/google/login",
-  passport.authenticate("google", { scope: ["email", "profile"]}, findOrCreateUser)
+  "/google",
+  passport.authenticate(
+    "google",
+    { scope: ["email", "profile"] },
+    findOrCreateUser
+  )
 );
 
 //@desc: Google callback
 //@route: GET /auth/google/callback
 router.get(
   "/google/callback",
-  passport.authenticate("google", {
-    failureRedirect: "/google/login",
-    successRedirect: "/success",
-  })
+  passport.authenticate(
+    "google",
+    {
+      failureRedirect: "/google/login",
+    },
+    (rq: Request, rs: Response) => {
+      //successful redirect:
+      rs.send("Successfully logged in");
+    }
+  )
 );
-
-//@desc: successfully authenticated
-//@route: GET /auth/success
-router.get("/success", (rq: Request, rs: Response) => {
-  rs.send("successfully authenticated");
-});
 
 export default router;
