@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { findOrCreateUser } from "../../services/user.service";
+import { logIn, signUp } from "../../services/user.service";
 
 //Interfaces:
 //Register request interface:
@@ -9,15 +9,34 @@ export interface RegisterInputs {
   googleID: string;
 }
 
-export const handleFindCreateUser = async (rq: Request, rs: Response) => {
+export interface LoginInputs {
+  googleID: string;
+  email: string;
+}
+
+export const handleLoginUser = async (
+  userInputs: LoginInputs,
+  rs: Response
+) => {
   try {
-    const { name, email, googleID } = rq.body;
-    const data = await findOrCreateUser(name, email, googleID);
-    rs.cookie("auth", data.refreshToken, {
-      httpOnly: true,
-      sameSite: "none",
-      maxAge: 24 * 60 * 60 * 1000,
-    });
+    const { googleID, email } = userInputs;
+    const data = await logIn(googleID, email);
+    //rs.cookie('auth', data.)
+  } catch (error) {}
+};
+
+export const handleCreateUser = async (userInputs: RegisterInputs) => {
+  const { name, email, googleID } = userInputs;
+
+  try {
+    //pass userInputs to user.service.ts:
+    const data = await signUp(name, email, googleID);
+    // rs.cookie("auth", data.refreshToken, {
+    //   httpOnly: true,
+    //   sameSite: "none",
+    //   maxAge: 24 * 60 * 60 * 1000,
+    // });
+    return data;
   } catch (error) {}
 
   //if user exists:

@@ -4,37 +4,27 @@ import {
   findUserById,
 } from "../database/repositories/user.repository";
 
-//INTERFACES:
-//Registering User:
-export interface RegisterInputs{
-  
-}
+//Login:
+export const logIn = async (googleID: string, email: string) => {};
 
-//Find an existing user or create one:
-export const signUp = async (
-  name: string,
-  email: string,
-  googleID: string
-) => {
+//Register a user:
+export const signUp = async (name: string, email: string, googleID: string) => {
   //check if user exists:
   const user = await findUserById(googleID);
 
-  if (user) {
-    
+  if (!user) {
+    //create a user:
+    const newUser = await createUser({ name, email, googleID });
+
     //generate refresh token:
 
     //save refresh token:
-
-    return {
-      
-      
-    };
 
     //accessToken,
     //refreshToken
 
     //return the existing user:
-    return user;
+    return {};
   } else {
     //create new user:
     const newUser = await createUser({ name, email, googleID });
@@ -43,3 +33,9 @@ export const signUp = async (
 };
 
 export const refreshTokenHandler = (rq: Request, rs: Response) => {};
+
+export const logout =async (refreshToken : string) => {
+    
+  await removeRefreshToken(refreshToken)
+
+}

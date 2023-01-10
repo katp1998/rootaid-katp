@@ -1,5 +1,7 @@
 import User from "../models/user.model";
 import { IUserInputs } from "../types/user.types";
+import passport from "passport";
+import { Request, Response } from "express";
 
 //create user:
 export const createUser = async ({ name, email, googleID }: IUserInputs) => {
@@ -22,8 +24,8 @@ export const createUser = async ({ name, email, googleID }: IUserInputs) => {
 export const findUserById = async (googleID: string) => {
   try {
     const existingUser = await User.findOne({ googleID: googleID });
-    //console.log({ existingUser });
     return existingUser;
+
   } catch (error) {
     return {
       error: "error",
@@ -73,3 +75,5 @@ export const removeRefreshToken = async (refreshToken: string) => {
     }
   } catch (error) {}
 };
+
+
